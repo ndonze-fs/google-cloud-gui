@@ -7,11 +7,11 @@ mkdir build
 cp README.md build/
 
 cd server
-yarn
+npm i
 cp -r . ../build/
 
 cd ../client
-yarn
-yarn build
+npm i
+npm run build
 
 cp -r build ../build/src/public
