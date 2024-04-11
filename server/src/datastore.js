@@ -1,7 +1,7 @@
 const { get, post } = require('server/router')
 const { json, status } = require('server/reply')
-const Datastore = require('@google-cloud/datastore')
-const { keyToKeyProto } = require('@google-cloud/datastore/src/entity')
+const { Datastore } = require('@google-cloud/datastore')
+const { entity: Entity } = require('@google-cloud/datastore/build/src/entity')
 
 const { projects } = require('./db')
 
@@ -56,7 +56,7 @@ module.exports = [
         .start(cursor || null)
       const results = await datastore.runQuery(query)
       results[0].forEach(
-        entity => (entity.__key__ = keyToKeyProto(entity[datastore.KEY]))
+        entity => (entity.__key__ = Entity.keyToKeyProto(entity[datastore.KEY]))
       )
       return json(results)
     }
